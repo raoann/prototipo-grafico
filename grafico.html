@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./grafico.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+
+    <title>Graficos</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="meu_grafico">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+    <div class="container">
+        <div class="dados">
+            <div class="lucro" style="width: auto;">
+                <h1 class="style_lucro">Dados Semestrais </h1>
+                <span class="style_lucro">Média Semestral:</span>
+                <br>
+                <input type="text" id="media_lucro" name="media-semestral" value="">
+                <br>
+                <br>
+                <span class="style_lucro">Média primeiro trimestre: </span>
+                <br>
+                <input type="text" id="primeiro_tri_lucro" name="Media-primeiro-trimestre" value="">
+                <br>
+                <br>
+                <span class="style_lucro">Média segundo trimestre:</span>
+                <br>
+                <input type="text" id="segundo_tri_lucro" name="Media-primeiro-trimestre" value="">
+                <br>
+                <br>
+                <span class="style_lucro">Lucro total:</span>
+                <br>
+                <input type="text" id="total_rendimento_lucro" name="Lucro-total-do-semestre" value="">
+                <br>
+                <br>
+            </div>
+
+        </div>
+
+        <div class="Tempo" >
+            <h1 class="style_tempo" >Tempo gasto </h1>
+            <span class="style_tempo">Média Semestral:</span>
+            <br>
+            <input type="text" id="media_tempo" name="media-semestral" value="">
+            <br>
+            <br>
+            <span class="style_tempo">Média primeiro trimestre: </span>
+            <br>
+            <input type="text" id="primeiro_tri_tempo" name="Media-primeiro-trimestre" value="">
+            <br>
+            <br>
+            <span class="style_tempo">Média segundo trimestre:</span>
+            <br>
+            <input type="text" id="segundo_tri_tempo" name="Media-primeiro-trimestre" value="">
+            <br>
+            <br>
+            <span class="style_tempo">Lucro total:</span>
+            <br>
+            <input type="text" id="total_rendimento_tempo" name="Tempo-total-do-semestre" value="">
+            <br>
+            <br>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
+<script>
+    let ctx = document.getElementById('myChart');
+
+    // Criando  numeros randomicos para atualizar o grafico sempre que ele for acessado
+
+    let lucro1 = Number((Math.random() * 5000)).toFixed();
+
+    let lucro2 = Number((Math.random() * 5000)).toFixed();
+
+    let lucro3 = Number((Math.random() * 5000)).toFixed();
+
+    let lucro4 = Number((Math.random() * 5000)).toFixed();
+
+    let lucro5 = Number((Math.random() * 5000)).toFixed();
+
+    let lucro6 = Number((Math.random() * 5000)).toFixed();
+
+    // Variaveis globais para fazer pequenas contas
+
+    let media_semestral = ((Number(lucro1) + Number(lucro2) + Number(lucro3) + Number(lucro4) + Number(lucro5) + Number(lucro6)) / 2).toFixed(2);
+
+    let primeiro_trimestre = ((Number(lucro1) + Number(lucro2) + Number(lucro3)) / 2).toFixed(2);
+
+    let segundo_trimestre = ((Number(lucro4) + Number(lucro5) + Number(lucro6)) / 2).toFixed(2);
+
+    let total = (Number(lucro1) + Number(lucro2) + Number(lucro3) + Number(lucro4) + Number(lucro5) + Number(lucro6));
+
+    // Implementando valores nos imputs que estão na parte de lucro
+
+    media_lucro.value = `R$${media_semestral}`;
+
+    primeiro_tri_lucro.value = `R$${primeiro_trimestre}`;
+
+    segundo_tri_lucro.value = `R$${segundo_trimestre}`;
+
+    total_rendimento_lucro.value = `R$${total}`;
+
+    // Criando  numeros randomicos para atualizar o grafico sempre que ele for acessado
+
+    let tempo1 = Number((Math.random() * 5000)).toFixed();
+
+    let tempo2 = Number((Math.random() * 5000)).toFixed();
+
+    let tempo3 = Number((Math.random() * 5000)).toFixed();
+
+    let tempo4 = Number((Math.random() * 5000)).toFixed();
+
+    let tempo5 = Number((Math.random() * 5000)).toFixed();
+
+    let tempo6 = Number((Math.random() * 5000)).toFixed();
+
+        // Variaveis globais para fazer pequenas contas
+
+    let semestral = ((Number(tempo1) + Number(tempo2) + Number(tempo3) + Number(tempo4) + Number(tempo5) + Number(tempo6)) / 2).toFixed(2);
+
+    let primeiro_tempo = ((Number(tempo1) + Number(tempo2) + Number(tempo3)) / 2).toFixed(2);
+
+    let segundo_tempo = ((Number(tempo4) + Number(tempo5) + Number(tempo6)) / 2).toFixed(2);
+
+    let total_tempo = (Number(tempo1) + Number(tempo2) + Number(tempo3) + Number(tempo4) + Number(tempo5) + Number(tempo6));
+
+    // Implementando valores nos imputs que estão na parte de tempo gasto
+
+    media_tempo.value = `${semestral}`;
+
+    primeiro_tri_tempo.value = `${primeiro_tempo}`;
+
+    segundo_tri_tempo.value = `${segundo_tempo}`;
+
+    total_rendimento_tempo.value = `${total_tempo}`;
+
+    // ao criar um new Chart, colocamos ->
+    // (contexto, { type, data e options} )
+    let meuGrafico = new Chart(ctx, {
+        // TYPE -> qual o tipo do gráfico? será um gráfico de barras? linhas? define aqui
+        type: 'bar',
+
+        // DATA -> os dados renderizados no gráfico:
+        data: {
+            // Informações em Eixo X
+            labels: ["jan", "fev", "mar", "abr", "mai", "jun"],
+            // Datasets -> grupos de dados!
+            datasets: [
+                // Primeiro dataset    
+                {
+                    // Qual o título deste dataset?
+                    label: "Rendimentos 2021",
+                    // Dados? Lembre-se, respectivos a labels.
+                    data: [lucro1, lucro2, lucro3, lucro4, lucro5, lucro6],
+                    // expessura da linha
+                    borderWidth: 8,
+                    // cor da linha - em rgba, a é a opacidade.
+                    // 1 = 100% // 0.5 = 50%
+                    borderColor: 'rgba(2, 90, 17, .7)',
+                    // cor de "fundo" dos dados na tela. transparent = sem cor.
+                    backgroundColor: '#7ED779',
+                },
+                {
+                    // igual o anterior. Mas, aqui, type line
+                    type: 'line',
+                    label: "Tempo gasto ",
+                    data: [tempo1, tempo2, tempo3, tempo4, tempo5, tempo6],
+                    borderWidth: 10,
+                    borderColor: 'rgba(30, 162, 182, .7)',
+                    backgroundColor: 'transparent'
+                }
+            ]
+        },
+
+        // OPTIONS -> Opções globais
+        options: {
+
+            title: {
+                // mostrar titulo?
+                display: true,
+                // tamanho do texto
+                fontSize: 30,
+                // texto no titulo
+                text: "Rendimento Semestral",
+                // onde? right? left? top?
+                position: 'top',
+            },
+            legend: {
+                // mostrar legenda?
+                display: true,
+                // ao contrario? (dataset 1 depois de 2)
+                reverse: true,
+                // onde?
+                position: 'top'
+            },
+            layout: {
+                padding: {
+                    // padding do grafico, pode add right e bottom também
+                    left: 30,
+                    top: 30
+                },
+
+            }
+        }
+    })
+
+    // mudando cor de fonte de tudo
+    Chart.defaults.global.defaultFontColor = "black";
+
+</script>
